@@ -721,6 +721,8 @@ class DPlayer {
 
                             // initialize aribb24.js
                             // https://github.com/monyone/aribb24.js
+                            console.log(`[字幕] this.options.subtitle:${this.options.subtitle}`);
+                            console.log(`[字幕] this.options.subtitle.type:${this.options.subtitle?.type}`);
                             if (this.options.subtitle && this.options.subtitle.type === 'aribb24') {
                                 // set options
                                 if (this.options.pluginOptions.aribb24 === undefined) {
@@ -728,9 +730,13 @@ class DPlayer {
                                 }
 
                                 // initialize aribb24 caption
+                                console.log(`[字幕] initialize aribb24 caption`);
                                 const aribb24CaptionController = this.plugins.aribb24CaptionController = new aribb24js.Controller();
                                 const aribb24CaptionFeeder = this.plugins.aribb24CaptionFeeder = new aribb24js.MPEGTSFeeder();
                                 const aribb24CaptionRenderer = this.plugins.aribb24CaptionRenderer = new aribb24js.SVGDOMRenderer(this.options.pluginOptions.aribb24);
+                                console.log(`[字幕] aribb24CaptionController:${aribb24CaptionController}`);
+                                console.log(`[字幕] aribb24CaptionFeeder:${aribb24CaptionFeeder}`);
+                                console.log(`[字幕] aribb24CaptionRenderer:${aribb24CaptionRenderer}`);
                                 aribb24CaptionController.attachFeeder(aribb24CaptionFeeder);
                                 aribb24CaptionController.attachRenderer(aribb24CaptionRenderer);
                                 aribb24CaptionController.attachMedia(video);
@@ -738,12 +744,16 @@ class DPlayer {
 
                                 // push caption data into CanvasRenderer
                                 mpegtsPlayer.on(window.mpegts.Events.PES_PRIVATE_DATA_ARRIVED, (data) => {
+                                    console.log(`[字幕] PES_PRIVATE_DATA_ARRIVED:${data.data}`);
                                     if (this.plugins.aribb24CaptionController) {
+                                        console.log(`[字幕] feedB24:${data.data}`);
                                         this.plugins.aribb24CaptionFeeder?.feedB24(new Uint8Array(data.data).buffer, (data.pts ?? data.nearest_pts) / 1000, (data.dts ?? data.nearest_pts) / 1000);
                                     }
                                 });
                                 mpegtsPlayer.on(window.mpegts.Events.TIMED_ID3_METADATA_ARRIVED, (data) => {
+                                    console.log(`[字幕] TIMED_ID3_METADATA_ARRIVED:${data.data}`);
                                     if (this.plugins.aribb24CaptionController) {
+                                        console.log(`[字幕] feedID3:${data.data}`);
                                         this.plugins.aribb24CaptionFeeder?.feedID3(new Uint8Array(data.data).buffer, (data.pts ?? data.nearest_pts) / 1000, (data.dts ?? data.nearest_pts) / 1000);
                                     }
                                 });

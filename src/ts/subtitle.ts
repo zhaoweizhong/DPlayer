@@ -51,8 +51,8 @@ class Subtitle {
         // for aribb24.js (caption only)
         // superimpose is used to notify important breaking news, so it is inappropriate to hide it at the same time as hiding subtitles.
         // if you want to disable the drawing of superimpose itself, options.plugins.aribb24.disableSuperimposeRenderer should be set to true.
-        if (this.options.type === 'aribb24' && this.plugins.aribb24Caption) {
-            this.plugins.aribb24Caption.show();
+        if (this.options.type === 'aribb24' && this.plugins.aribb24CaptionController) {
+            this.plugins.aribb24CaptionController.show();
         }
         this.events.trigger('subtitle_show');
     }
@@ -62,8 +62,8 @@ class Subtitle {
         // for aribb24.js (caption only)
         // superimpose is used to notify important breaking news, so it is inappropriate to hide it at the same time as hiding subtitles.
         // if you want to disable the drawing of superimpose itself, options.plugins.aribb24.disableSuperimposeRenderer should be set to true.
-        if (this.options.type === 'aribb24' && this.plugins.aribb24Caption) {
-            this.plugins.aribb24Caption.hide();
+        if (this.options.type === 'aribb24' && this.plugins.aribb24CaptionController) {
+            this.plugins.aribb24CaptionController.hide();
         }
         this.events.trigger('subtitle_hide');
     }

@@ -349,9 +349,7 @@ export interface PluginOptions {
     };
     dash?: dashjs.MediaPlayerSettingClass;
     webtorrent?: WebTorrent.Options;
-    aribb24?: aribb24js.CanvasRendererOption & {
-        disableSuperimposeRenderer?: boolean;
-    };
+    aribb24?: aribb24js.PartialSVGDOMRendererOption;
 }
 export interface WindowExtend extends Window {
     dashjs?: typeof dashjs;
@@ -436,8 +434,9 @@ export interface Plugins {
     flvjs?: FlvJs.Player;
     dash?: dashjs.MediaPlayerClass;
     webtorrent?: WebTorrent.Instance;
-    aribb24Caption?: aribb24js.CanvasRenderer;
-    aribb24Superimpose?: aribb24js.CanvasRenderer;
+    aribb24CaptionController?: aribb24js.Controller;
+    aribb24CaptionRenderer?: aribb24js.SVGDOMRenderer;
+    aribb24CaptionFeeder?: aribb24js.MPEGTSFeeder;
 }
 export interface APIBackendReadOptions {
     url?: string;

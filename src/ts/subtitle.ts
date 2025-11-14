@@ -63,6 +63,7 @@ class Subtitle {
         // superimpose is used to notify important breaking news, so it is inappropriate to hide it at the same time as hiding subtitles.
         // if you want to disable the drawing of superimpose itself, options.plugins.aribb24.disableSuperimposeRenderer should be set to true.
         if (this.options.type === 'aribb24' && this.plugins.aribb24CaptionController) {
+            this.plugins.aribb24CaptionRenderer?.clear();
             this.plugins.aribb24CaptionController.hide();
         }
         this.events.trigger('subtitle_hide');

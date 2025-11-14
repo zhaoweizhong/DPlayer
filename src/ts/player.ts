@@ -684,6 +684,7 @@ class DPlayer {
                             if (this.options.pluginOptions.mpegts === undefined) {
                                 this.options.pluginOptions.mpegts = {};
                             }
+                            console.log(`MPEGTS: this.options.pluginOptions.mpegts.config:${this.options.pluginOptions.mpegts.config}`);
                             const mpegtsPlayer = window.mpegts.createPlayer(
                                 Object.assign(this.options.pluginOptions.mpegts.mediaDataSource || {}, {
                                     type: 'mpegts',

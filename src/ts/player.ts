@@ -476,6 +476,7 @@ class DPlayer {
 
     initMSE(video: HTMLVideoElement, type: DPlayerType.VideoType | string): void {
         this.type = type;
+        console.log(`MSE init: type:${this.type}`);
         if (this.options.video.customType && this.options.video.customType[type]) {
             if (Object.prototype.toString.call(this.options.video.customType[type]) === '[object Function]') {
                 this.options.video.customType[type](this.video, this);
@@ -655,7 +656,9 @@ class DPlayer {
                 //     break;
                 // // https://github.com/xqq/mpegts.js
                 case 'mpegts':
+                    console.log(`MPEGTS: window.mpegts:${window.mpegts}`);
                     if (window.mpegts) {
+                        console.log(`MPEGTS: window.mpegts.isSupported():${window.mpegts.isSupported()}`);
                         if (window.mpegts.isSupported()) {
                             // if it has already been initialized, destroy it once
                             if (this.plugins.mpegts) {
@@ -851,6 +854,7 @@ class DPlayer {
     }
 
     initVideo(video: HTMLVideoElement, type: DPlayerType.VideoType | string): void {
+        console.log(`initVideo: type:${type}`);
         this.initMSE(video, type);
 
         /**
